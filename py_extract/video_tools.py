@@ -47,7 +47,7 @@ class Video_tools():
                     cmd = f"ffmpeg -i {input_file} -map 0:{the_mapping} -c copy {out_audio} -y"
                     run_cmd(cmd)
                 print("Process Finished")
-            return [os.path.abspath(out_path) for file in os.listdir(out_path)]
+            return [os.path.abspath(x) for x in os.listdir(out_path)]
         except Exception as error:
             return {"error": error}
     
