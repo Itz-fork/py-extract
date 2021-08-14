@@ -1,5 +1,6 @@
 # Copyright (c) 2021 - Itz-fork
 # Project: py_extract
+from abc import abstractproperty
 import json
 import os
 
@@ -19,6 +20,7 @@ class Video_tools():
             return {'error': error}
     
     def extract_all_audio(input_file=None, output_path=None):
+        path_list = []
         input_file = input_file
         output_path = output_path
         if input_file is None:
@@ -46,8 +48,9 @@ class Video_tools():
                     out_audio = f"{out_path}/extracted_{codec_type}_{the_mapping}.{codec_name}"
                     cmd = f"ffmpeg -i {input_file} -map 0:{the_mapping} -c copy {out_audio} -y"
                     run_cmd(cmd)
-                print("Process Finished")
-            return [os.path.abspath(x) for x in os.listdir(out_path)]
+                path_list.append(out_audio)
+            return path_list
+            
         except Exception as error:
             return {"error": error}
     
