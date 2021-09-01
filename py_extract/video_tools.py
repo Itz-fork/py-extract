@@ -1,6 +1,6 @@
 # Copyright (c) 2021 - Itz-fork
 # Project: py_extract
-from abc import abstractproperty
+
 import json
 import os
 
@@ -78,5 +78,40 @@ class Video_tools():
             cmd = f"ffmpeg -i {input_file} -vn -acodec copy {out_file}"
             run_cmd(cmd)
             return out_file
+        except Exception as error:
+            return {"error": error}
+    
+    def extract_subtitles(input_file=None, output_path=None):
+        path_list = []
+        input_file = input_file
+        output_path = output_path
+        if input_file is None:
+            return {"error": "input_file must not be None"}
+        elif output_path is None:
+            output_path = "py_extracted/all_subs"
+        # Creating directories if not exist
+        if os.path.exists(output_path):
+            out_path = output_path
+        else:
+            os.makedirs(output_path)
+            out_path = output_path
+        try:
+            json_details = Video_tools.video_info(input_file)
+            details = json.loads(json_details)
+            for toextract in details['streams']:
+                the_mapping = toextract['index']
+                codec_name = toextract['codec_name']
+                codec_type = toextract['codec_type']
+                if codec_type in ("subtitle"):
+                    pass
+                else:
+                    continue
+                for sub in codec_name:
+                    out_sub = f"{out_path}/extracted_{codec_type}_{the_mapping}.srt"
+                    cmd = f"ffmpeg -i {input_file} -c copy -map 0:s:{the_mapping} {out_sub} -y"
+                    run_cmd(cmd)
+                path_list.append(out_sub)
+            return path_list
+            
         except Exception as error:
             return {"error": error}
