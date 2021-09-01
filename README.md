@@ -2,14 +2,17 @@
 Py_extract is a simple, light-weight python library to handle some extraction tasks using less lines of code.
 **Still in Development Stage!**
 
-## Installation
+## Installation 🎛,
+
+***Using [Pypi](https://pypi.org/project/py-extract)***
 ```
-pip install git+https://github.com/Itz-fork/py-extract.git
+pip install py-extract
 ```
 
 # Features,
 - Get Video metadata (data will returns as json)
-- Extract Audio from a video
+- Extract Audio(s) from a video
+- Extract Subtitle(s) from a video
 
 Only This for now, more features coming soon 😉...
 
