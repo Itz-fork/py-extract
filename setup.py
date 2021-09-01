@@ -24,7 +24,7 @@ else:
 
 
 setup(name='py_extract',
-version='0.0.1',
+version='0.0.2',
 description='Py_extract is a simple, light-weight python library to handle some extraction tasks using less lines of code.',
 url='https://github.com/Itz-fork/py-extract',
 author='Itz-fork',
